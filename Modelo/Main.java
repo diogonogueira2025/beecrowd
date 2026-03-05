@@ -5,6 +5,7 @@
 
 > Usar o DecimalFormat para formatacao de Decimal:
     DecimalFormat df = new DecimalFormat("0.000");
+    df.format(valor)
 
 > Não usar o fila.poll() para remover, usar o fila.remove()
 */
@@ -21,6 +22,7 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
 
+        System.out.print(sb);
         in.close();
     }
 }

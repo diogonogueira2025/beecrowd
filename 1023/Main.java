@@ -42,6 +42,7 @@ public class Main {
             sb.append("Cidade# "+(cidades)+":\n");
 
             int i = 0;
+            
             while(!map.isEmpty()){
                 int cons = c.get(i);
                 sb.append(map.remove(cons) + "-" + cons);
