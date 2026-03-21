@@ -24,44 +24,46 @@ public class Main {
 
             Arrays.sort(nums);
 
-            int first1 = nums[n-1];
-            int last1 = nums[0];
+            //forma1: maior-menor
+            int first1 = nums[n-1]; //maior
+            int last1 = nums[0]; //menor
 
-            int first2 = nums[0];
-            int last2 = nums[n-1];
+            //forma2: maior-menor
+            int first2 = nums[0]; //menor
+            int last2 = nums[n-1]; //maior
 
-            int sum = abs(first1-last1);
-            int sum2 = abs(first2-last2);
+            int sum = abs(first1-last1); //soma para forma1
+            int sum2 = abs(first2-last2); //soma para forma2
 
-            int a = 1;
-            int b = n-2;
+            int a = 1; //índice começa por 1, pois já tratei o primeiro caso
+            int b = n-2; //n é o tamanho, por isso precisa ser n-2
 
-            boolean mudar = true;
+            boolean mudar = true; //vai mudar, por exemplo, de maior-menor -> menor-maior
 
             while(a < b){
-                int maior = nums[a++];
-                int menor = nums[b--];
+                int menor = nums[a++]; //pegando o menor valor
+                int maior = nums[b--]; 
 
                 if(mudar) {
-                    //maior - menor -> menor - maior
-                    sum += abs(maior - first1) + abs(menor - last1);
-                    first1 = maior;
-                    last1 = menor;
-
-                    //menor - maior -> maior - menor
-                    sum2 += abs(menor - first2) + abs(maior - last2);
-                    first2 = menor;
-                    last2 = maior;
-                } else {
-                    //menor - maior -> maior - menor
+                    //forma1: maior-menor
                     sum += abs(menor - first1) + abs(maior - last1);
                     first1 = menor;
                     last1 = maior;
 
-                    //maior - menor -> menor - maior
+                    //forma2
                     sum2 += abs(maior - first2) + abs(menor - last2);
                     first2 = maior;
                     last2 = menor;
+                } else {
+                    //forma1
+                    sum += abs(maior - first1) + abs(menor - last1);
+                    first1 = maior;
+                    last1 = menor;
+
+                    //forma2
+                    sum2 += abs(menor - first2) + abs(maior - last2);
+                    first2 = menor;
+                    last2 = maior;
                 }
 
                 mudar = !mudar;
@@ -70,25 +72,28 @@ public class Main {
             if(a == b){
                 int num = nums[a];
                 
-                int d1 = abs(num-first1);
-                int d2 = abs(num-last1);
+                //forma1
+                int s1 = abs(num-first1); //verificando soma com o primeiro elemento
+                int s2 = abs(num-last1); //verificando soma com o último elemento
 
-                if(d1 > d2){
-                    sum += d1;
+                if(s1 > s2){
+                    sum += s1;
                 } else {
-                    sum += d2;
+                    sum += s2;
                 }
 
-                int d3 = abs(num-first2);
-                int d4 = abs(num-last2);
+                //forma2
+                int s3 = abs(num-first2);
+                int s4 = abs(num-last2);
 
-                if(d3 > d4){
-                    sum2 += d3;
+                if(s3 > s4){
+                    sum2 += s3;
                 } else {
-                    sum2 += d4;
+                    sum2 += s4;
                 }
             }
 
+            //verificando qual soma das formas é a maior
             int res = (sum > sum2) ? sum : sum2;
             
             sb.append("Case ")
