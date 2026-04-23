@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(
+            new InputStreamReader(System.in)
+        );
         StringBuilder sb = new StringBuilder();
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -17,8 +20,8 @@ public class Main {
         int cidades = 1;
         boolean primeiro = true;
 
-        while(!linha.equals("0")){
-            if(!primeiro){
+        while (!linha.equals("0")) {
+            if (!primeiro) {
                 sb.append("\n");
             }
             primeiro = false;
@@ -27,37 +30,38 @@ public class Main {
             double consumoMedio = 0;
             int pessoas = 0;
 
-            for(int i = 0; i < casos; i++){
+            for (int i = 0; i < casos; i++) {
                 String[] valores = in.readLine().split(" ");
                 int moradores = Integer.parseInt(valores[0]);
                 int consumo = Integer.parseInt(valores[1]);
-                int cPorM = consumo/moradores;
-                map.put(cPorM, map.getOrDefault(cPorM,0)+moradores);
+                int cPorM = consumo / moradores;
+                map.put(cPorM, map.getOrDefault(cPorM, 0) + moradores);
                 pessoas += moradores;
                 consumoMedio += consumo;
             }
             List<Integer> c = new ArrayList<>(map.keySet());
             Collections.sort(c);
 
-            sb.append("Cidade# "+(cidades)+":\n");
+            sb.append("Cidade# " + (cidades) + ":\n");
 
             int i = 0;
-            
-            while(!map.isEmpty()){
+
+            while (!map.isEmpty()) {
                 int cons = c.get(i);
                 sb.append(map.remove(cons) + "-" + cons);
-                if(map.size() > 0) sb.append(" ");
+                if (map.size() > 0) sb.append(" ");
                 i++;
             }
             sb.append("\n");
-            consumoMedio = Math.floor((consumoMedio/pessoas)*100)/100.0;
-            sb.append(String.format("Consumo medio: %.02f m3.\n", consumoMedio));
+            consumoMedio = Math.floor((consumoMedio / pessoas) * 100) / 100.0;
+            sb.append(
+                String.format("Consumo medio: %.02f m3.\n", consumoMedio)
+            );
             cidades++;
             linha = in.readLine();
         }
 
         System.out.print(sb);
         in.close();
-
     }
 }
