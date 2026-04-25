@@ -26,7 +26,7 @@ public class Main {
 
         int hora = time/3600;
         time = time%3600;
-
+        
         int min = time/60;
         time = time%60;
 
