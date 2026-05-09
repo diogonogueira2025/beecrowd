@@ -1,61 +1,63 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.TreeSet;
 import java.io.IOException;
-import java.util.Queue;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.LinkedList;
 
 public class Main {
-   public static void main(String[] args) throws IOException{
-       BufferedReader in = new BufferedReader(
-         new InputStreamReader(System.in)
-       );
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(
+            new InputStreamReader(System.in)
+        );
 
-       StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-       String linha;
-       boolean primeiro = true;
+        String linha;
 
-       while ((linha = in.readLine()) != null) {
-           if (!primeiro) sb.append("\n");
-           primeiro = false;
+        while ((linha = in.readLine()) != null) {
+            int size = linha.length();
 
-           Set<String> set = new TreeSet<>();
-          
-           Queue<String> fila = new LinkedList<>();
-           Queue<Integer> index = new LinkedList<>();
-          
-           char[] carac = linha.toCharArray();
-           int tam = carac.length;
-          
-           for (int i = 0; i < tam; i++) {
-               String s = String.valueOf(carac[i]);
-               fila.add(s);
-               index.add(i);
-               set.add(s);
-           }
+            LinkedList<Subsequence> queue = new LinkedList<>();
+            Set<String> set = new TreeSet<>();
 
-           while (!fila.isEmpty()) {
-               String s = fila.remove();
-               int n = index.remove();
+            for (int i = 0; i < size; i++) {
+                Subsequence sub = new Subsequence(linha.substring(i, i+1), i);
 
-               for (int i = n + 1; i < tam; i++) {
-                   String res = s + String.valueOf(carac[i]);
-                  
-                   if(set.add(res)) {
-                       fila.add(res);
-                       index.add(i);
-                   }
-               }
-           }
+                queue.add(sub);
+                set.add(sub.s);
+            }
 
-           for (String s : set) {
-               sb.append(s).append("\n");
-           }
-       }
+            while (!queue.isEmpty()) {
+                Subsequence sub  = queue.remove();
 
-       System.out.println(sb);
-       in.close();
-   }
+                int lastIndex = sub.lastIndex;
+                String s = sub.s;
+
+                for (int i = lastIndex + 1; i < size; i++) {
+                    String newS = s + linha.charAt(i);
+                    if (set.add(newS)) {
+                        queue.add(new Subsequence(newS, i));
+                    }
+                }
+            }
+
+            for (String s : set) {
+                sb.append(s).append("\n");
+            }
+            sb.append("\n");
+        }
+        System.out.print(sb);
+        in.close();
+    }
+}
+
+class Subsequence {
+    String s;
+    int lastIndex;
+
+    public Subsequence(String s, int lastIndex) {
+        this.s = s;
+        this.lastIndex = lastIndex;
+    }
 }
