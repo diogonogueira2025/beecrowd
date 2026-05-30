@@ -1,6 +1,3 @@
-//fazer esta bagaça de novo KKKKKKKKKKK
-// código véi prodre
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -13,23 +10,23 @@ public class Main {
         );
         StringBuilder sb = new StringBuilder();
 
-        int n = Integer.parseInt(in.readLine());
+        int n = Integer.parseInt(in.readLine()); //lendo a ordem N da matriz
 
-        int diagP = 0;
-        int diagS = 0;
+        int diagP = 0; //somatório para a diagonal principal
+        int diagS = 0; //somatório para a diagonal secundária
 
-        int soma = 0;
-        int[] somaColuna = new int[n];
+        int soma = 0; //soma do quadrado mágico (valor mágico do quadrado)
+        int[] somaColuna = new int[n]; //somatório para cada coluna
 
-        int somaDig = 0;
-        int dig = ((n*n)*(n*n + 1))/2;
-
-        boolean ehMagico = true;
+        int somaDig = 0; //soma de todos os valores da matriz
+        int dig = ((n*n)*(n*n + 1))/2; //somatório para n elementos 1+2+3+4+5+6+7+8+9
+        
+        boolean ehMagico = true; //variável booleana para verificar se é um quadrado mágico
 
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(in.readLine(), " ");
 
-            int somaAux = 0;
+            int somaAux = 0; //somar os valores de cada linha
 
             for (int j = 0; j < n; j++) {
                 int value = Integer.parseInt(st.nextToken());
