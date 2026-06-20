@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+
+    public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(
-          new InputStreamReader(System.in)
+            new InputStreamReader(System.in)
         );
 
         StringBuilder sb = new StringBuilder();
@@ -18,7 +19,7 @@ public class Main {
         } else {
             System.out.println("no");
         }
-        
+
         in.close();
     }
 }
